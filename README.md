@@ -23,7 +23,7 @@ MOCKAWS.mock("DynamoDB", "getItem", (params, callback) => {
 });
 ```
 
-### new MOCKAWS.service()
+### new MOCKAWS.service([credentials[, options]])
 
 This function allows you to create a new instance of an aws-mockify service.
 
@@ -32,6 +32,17 @@ const MOCKAWS = require("aws-mockify");
 
 const ddb = new MOCKAWS.DynamoDB();
 ddb.getItem({"Key": {"id": {"N": "1"}}, "TableName": "User"}).promise().then((item) => {
+	console.log(item);
+});
+```
+
+You can also pass in an options object to set the version to AWS SDK v3:
+
+```js
+const MOCKAWS = require("aws-mockify");
+
+const ddb = new MOCKAWS.DynamoDB(undefined, {"version": 3});
+ddb.getItem({"Key": {"id": {"N": "1"}}, "TableName": "User"}).then((item) => {
 	console.log(item);
 });
 ```
